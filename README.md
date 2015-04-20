@@ -1,4 +1,4 @@
-# Pre-Interview Task
+# Javascript Challenge
 
 Included in this repository is a blank HTML template containing the list of items stored in JSON format. 
 
