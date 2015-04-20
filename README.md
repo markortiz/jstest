@@ -4,7 +4,7 @@ Included in this repository is a blank HTML template containing the list of item
 
 Using the provided HTML file, please create a mobile web mockup following the design indicated in the wireframe:
 
-{{imagelink}}
+https://www.dropbox.com/s/6aalosn3hk1i1ku/jstest-wireframe.jpg?dl=0
 
 ## Requirements:
 * HTML5 and CSS3 required.
