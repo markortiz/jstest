@@ -2,10 +2,133 @@
   <head>
     <title>Betica Shop</title>
     <meta charset="utf-8">
-    <meta name="author" content="YOUR NAME">
+    <meta name="author" content="MARK KENNETH ORTIZ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/normalize.css"  media="screen,projection"/>
+    <style>
+      body {
+        background: #f5f5f5;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        padding-top: 53px;
+      }
+      .header-container {
+        background: #50ca2c;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+      }
+      .header {
+        letter-spacing: 3px;
+        color: #fff;
+        margin: 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px;
+        overflow-y: scroll;
+      }
+      .category {
+        background: #fff;
+        margin: 10px 0;
+        padding: 10px 0px 10px 0;
+        box-shadow: 0px 0px 10px #c5c5c5;
+      }
+      .category-title {
+        text-align: left;
+        padding-left: 10px;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .category-items {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        overflow-x: scroll;
+        padding: 0 10px;
+      }
+      .item-container {
+        display: flex;
+        flex-direction: row;
+      }
+      .item-container:after {
+        content: "";
+        width: 10px;
+        height: 10px;
+      }
+      .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #fff;
+        box-shadow: 0px 2px 5px #c5c5c5;
+        border: 1px solid #333;
+        border-radius: 3px;
+        width: 90%;
+        min-height: 200px;
+        min-width: 200px;
+        margin: 10px;
+      }
+      .item-title {
+        font-size: 1em;
+        font-weight: normal;
+        text-align: center;
+        padding: 10px;
+        width: 100%;
+        margin: 0 auto;
+        border-bottom: 1px solid #333;
+      }
+      .description {
+        display: flex;
+        font-weight: 300;
+        padding: 10px;
+        line-height: 1.5em;
+        letter-spacing: 1px;
+        flex-grow: 1;
+      }
+      .img {
+        width: 100%;
+      }
+      .btn {
+        font-weight: bold;
+        display: block;
+        display: flex;
+        align-self: flex-end;
+        justify-content: center;
+        outline: 0;
+        border: 0;
+        background: #50ca2c;
+        text-align: center;
+        width: 60%;
+        padding: 10px;
+        margin: 10px auto;
+        color: #fff;
+      }
+      footer {
+        font-size: 11px;
+        border-top: 1px solid #333;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <div id="content"></div>
+    <div id="content">
+      <header class="header-container">
+        <h1 class="header">BETICA SHOP</h1>
+      </header>
+      <div id="container" class="container">
+      </div>
+      <footer>COPYRIGHT 2014</footer>
+    </div>
+    <!-- Load Babel -->
+    <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+    <!-- End Load Babel -->
     <script type="text/javascript">
       var info = {
         "items": {
@@ -62,10 +185,62 @@
           }
         }
       };
-       
+
       // enter your code here
       // render the items in the info using native Javascript or jQuery
+      Object.filter = (obj, predicate) => {
+        return Object.keys(obj)
+              .filter( key => predicate(obj[key], key) )
+              .reduce( (res, key) => (res[key] = obj[key], res), {} );
+      }
+      var forEach = (object, callback) => {
+          for(var prop in object) {
+              if(object.hasOwnProperty(prop)) {
+                  callback(object[prop], prop);
+              }
+          }
+      }
+      var formatYear = (date) => {
+        var newDate = new Date(date);
+        return newDate.getFullYear();
+      }
 
+      var categories = Object.filter(info.items, (item, key) => {
+          if(item.hasOwnProperty('categoryName')) {
+            return item['products'] = Object.filter(info.items, product => product.hasOwnProperty('categoryId') && product.categoryId === key);
+          }
+      });
+      var Item = (product) => {
+        return `<div class="item">
+                  <h3 class="item-title">${product.productName}</h3>
+                  <div class="description">
+                    Manufactured by ${product.manufacturer}, to be released in ${formatYear(product.releaseDate)}.
+                  </div>
+                  <button class="btn">${product.price}</button>
+                </div>`;
+      }
+      var Category = (category) => {
+        var Items = '';
+        forEach(category.products, (product) => {
+          Items = Items + Item(product)
+        })
+        return `<div class="category">
+                  <h2 class="category-title">${category.categoryName}</h2>
+                  <div class="category-items">
+                    <div class="item-container">
+                    ${Items}
+                    </div>
+                  </div>
+                </div> `;
+      }
+
+      window.onload = () => {
+        var content = '';
+        forEach(categories, (category) => {
+          content = content + Category(category);
+        })
+        document.getElementById('container').insertAdjacentHTML('beforeend', content);
+      }
     </script>
 </body>
 </html>
