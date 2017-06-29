@@ -20,10 +20,10 @@ You are free to create your own design or apply existing design/frameworks (Boot
 *   *  *I'm a fan of **functional programming** and **ReactJS** so you'll might notice that I created some independent function like filter, forEach and formatYear; and some reusable component such as Category and Item. Then I start to format the API response into 2 dimensional object that would looks like:*
 	```
     {
-    	"c001": {
-          "categoryName":"Phones",
-          "products": {...}
-         }
+      "c001": {
+        "categoryName":"Phones",
+        "products": {...}
+      }
     }
     ```
 * * *After formatting API response, I loop it with reusable component then push it into the `.container`.*
