@@ -16,7 +16,7 @@ You are free to create your own design or apply existing design/frameworks (Boot
 
 ## Please answer the following questions:
 * Please explain how did you come up with the solution. We would like to see your train of thought.
-*  * *First  wrote my javascript code in ES5 format to look more simpler and lesser codes (lesser codes == lesser bugs). I planned also to add Babel Polyfill to support old browser but however I just commented it out since I though it would not be necessary since new browsers support ES5 now and for faster loading as well.*
+*  * *First I wrote my javascript code in ES5 format to look more simpler and lesser codes (lesser codes == lesser bugs). I also planned to add Babel Polyfill to support old browser however I just commented it out since I though it would not be necessary since new browsers/mobile browsers support ES5 now; and for faster loading as well.*
 *   *  *I'm a fan of **functional programming** and **ReactJS** so you'll might notice that I created some independent function like filter, forEach and formatYear; and some reusable component such as Category and Item. Then I start to format the API response into 2 dimensional object that would looks like:*
 	```
     {
